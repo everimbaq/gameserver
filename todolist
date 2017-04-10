@@ -1,0 +1,20 @@
+# todolist
+##
+### protobuf
+### bif
+### nif
+### port and port_command
+configuration module
+
+hot update / code_change
+
+prof of code / mem / cpu / process
+
+a concurrency benchmark test framework(reference:tsung)
+
+ram cache framework
+
+log framework lager
+
+common type check 通用的类型检查模块
+

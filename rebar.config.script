@@ -1,0 +1,72 @@
+%% -*- mode: erlang;erlang-indent-level: 4;indent-tabs-mode: nil -*-
+%% ex: ts=4 sw=4 ft=erlang et
+
+ExtraDeps = [{retest, ".*", {git, "git://github.com/rebar/retest.git",
+                             {tag, "1.1.0"}}}],
+
+case os:getenv("REBAR_EXTRA_DEPS") of
+    false ->
+        CONFIG;
+    _ ->
+        case lists:keysearch(deps, 1, CONFIG) of
+            {value, {deps, Deps}} ->
+                NDeps = Deps ++ ExtraDeps,
+                lists:keyreplace(deps, 1, CONFIG, {deps, NDeps});
+            false ->
+                CONFIG ++ [{deps, ExtraDeps}]
+        end
+end.
+
+
+%%{erl_opts, Opts} = lists:keyfind(erl_opts, 1, CONFIG),
+%%
+%%Deps = {deps, [
+%%%%日志系统
+%%{lager, ".*", {git, "https://github.com/basho/lager.git", {tag, "3.2.1"}}},
+%%
+%%%%连接mysql的驱动，线程池实现
+%%{emysql, ".*", {git, "https://github.com/Eonblast/Emysql.git", {tag, "0.4.1"}}},
+%%
+%%%%%% erlang实现的json解析库，参考rfc4627标准
+%%%%{erl_rfc4627, ".*", {git, "https://github.com/tonyg/erlang-rfc4627.git", {tag, "version_1.1.1"}}},
+%%
+%%%% redis连接池
+%%{eredis_pool, ".*", {git, "https://github.com/hiroeorz/eredis_pool.git", master}},
+%%
+%%%% web服务器，使用websocket
+%%{cowboy, ".*", {git, "https://github.com/ninenines/cowboy.git", "2.0.0-pre.3"}},
+%%
+%%%% nif json处理
+%%{jiffy, ".*", {git, "https://github.com/davisp/jiffy.git", {tag, "0.14.8"}}}
+%%
+%%
+%%%%    %% 通用函数
+%%%%    {common, ".*", {git, "https://github.com/yujian1018/common", {tag, "master"}}},
+%%
+%%%%    %% 配置文件加载
+%%%%    {config, ".*", {git, "https://github.com/yujian1018/config", {tag, "master"}}},
+%%
+%%%%   %% 数据缓存系统
+%%%%    {ets_cache, ".*", {git, "https://github.com/yujian1018/ets_cache", {tag, "master"}}},
+%%
+%%%%   %% gm工具
+%%%%    {gm, ".*", {git, "https://github.com/yujian1018/gm_tool", {tag, "master"}}},
+%%
+%%%%    %% 监听模块
+%%%%    {listen, ".*", {git, "https://github.com/yujian1018/listen", {tag, "master"}}},
+%%
+%%%%    %% 自动义格式解析
+%%%%    {parse_tool, ".*", {git, "https://github.com/yujian1018/parse_tool", {tag, "master"}}}
+%%
+%%]},
+%%
+%%{NewOpts, ConfigOS} =
+%%case os:type() of
+%%{unix,linux} ->
+%%{[native, {d, linux}]++Opts, [Deps, {sub_dirs, ["rel", "apps/*"]}]};
+%%%{[native, {d, linux}]++Opts, [{sub_dirs, ["rel", "deps/lager", "deps/emysql", "deps/eredis_pool", "deps/cowboy", "deps/rfc4627_jsonrpc", "apps/*"]}]};
+%%_ ->
+%%{[{d, windows}]++Opts, [{sub_dirs, ["rel", "deps/lager", "apps/*"]}]}
+%%end,
+%%
+%%lists:keyreplace(erl_opts, 1, CONFIG, {erl_opts, NewOpts}) ++ ConfigOS.

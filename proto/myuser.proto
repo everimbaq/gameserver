@@ -1,0 +1,24 @@
+message myuser{
+    required identity id = 1;
+    optional enum_sex sex =2;
+    repeated job job=3;
+}
+
+message job {
+    required int32 company=1;
+    optional string title=2;
+}
+
+message identity{
+    required string name = 1;
+    repeated string family=2;
+    optional int32 age = 3;
+}
+
+enum enum_sex {
+    option allow_alias = true; // 允许别名, 用相同的值表示就可以
+    MALE = 0;
+    FAMALE = 1;
+    MAN = 0;
+    WOMAN = 1;
+}

@@ -1,0 +1,34 @@
+{application, zggame,
+ [
+  {description, ""},  %% A one-line description of the application.
+  {vsn, "1"}, %% Version of the application.
+  {id, "1"},
+%%   All modules introduced by this application. systools uses this list when generating start scripts and tar files. A module can only be defined in one application.
+   {modules, []},
+%%All names of registered processes started in this application. systools uses this list to detect name clashes between different applications.
+  {registered, []},
+%%   Deprecated - is ignored
+%%Maximum number of processes allowed in the application.
+   {maxP, 65535},
+%%   Maximum time, in milliseconds, that the application is allowed to run. After the specified time, the application terminates automatically.
+%%   {maxT, 65535},
+
+%%   All applications included by this application. When this application is started, all included applications are loaded automatically, but not started, by the application controller. It is assumed that the top-most supervisor of the included application is started by a supervisor of this application.
+   {included_applications, []},
+%%   A list of application versions that the application depends on.
+   {runtime_dependencies, []},
+%%  app 启动后的操作
+%% A list of start phases and corresponding start arguments for the application. If this key is present, the application master, in addition to the usual call to Module:start/2, also calls Module:start_phase(Phase,Type,PhaseArgs) for each start phase defined by key start_phases. Only after this extended start procedure, application:start(Application) returns.
+   {start_phases, []},
+%%   All applications that must be started before this application is allowed to be started. systools uses this list to generate correct start scripts. Defaults to the empty list, but notice that all applications have dependencies to (at least) Kernel and STDLIB.
+  {applications, [
+                  kernel,
+                  stdlib
+                 ]},
+
+%% Specifies the application callback module and a start argument, see application(3). Key mod is necessary for an application implemented as a supervision tree, otherwise the application controller does not know how to start it. mod can be omitted for applications without processes, typically code libraries, for example, STDLIB.
+  {mod, { zggame_app, []}},
+
+%%   Configuration parameters used by the application. The value of a configuration parameter is retrieved by calling application:get_env/1,2. The values in the application resource file can be overridden by values in a configuration file
+  {env, []}
+ ]}.
